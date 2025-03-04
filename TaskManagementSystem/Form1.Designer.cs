@@ -44,6 +44,7 @@
             pictureBox3 = new PictureBox();
             button3 = new Button();
             panel6 = new Panel();
+            label2 = new Label();
             pictureBox4 = new PictureBox();
             button4 = new Button();
             panel7 = new Panel();
@@ -89,13 +90,13 @@
             nightControlBox1.CloseHoverColor = Color.FromArgb(199, 80, 80);
             nightControlBox1.CloseHoverForeColor = Color.White;
             nightControlBox1.DefaultLocation = true;
-            nightControlBox1.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox1.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
-            nightControlBox1.EnableCloseColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.DisableMaximizeColor = Color.FromArgb(224, 224, 224);
+            nightControlBox1.DisableMinimizeColor = Color.FromArgb(224, 224, 224);
+            nightControlBox1.EnableCloseColor = Color.FromArgb(224, 224, 224);
             nightControlBox1.EnableMaximizeButton = true;
-            nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMaximizeColor = Color.FromArgb(224, 224, 224);
             nightControlBox1.EnableMinimizeButton = true;
-            nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMinimizeColor = Color.FromArgb(224, 224, 224);
             nightControlBox1.Location = new Point(1026, 0);
             nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
             nightControlBox1.MaximizeHoverForeColor = Color.White;
@@ -250,12 +251,26 @@
             // 
             // panel6
             // 
+            panel6.Controls.Add(label2);
             panel6.Controls.Add(pictureBox4);
             panel6.Controls.Add(button4);
             panel6.Location = new Point(3, 193);
             panel6.Name = "panel6";
             panel6.Size = new Size(250, 55);
             panel6.TabIndex = 25;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Red;
+            label2.Location = new Point(46, 1);
+            label2.Name = "label2";
+            label2.Size = new Size(19, 23);
+            label2.TabIndex = 0;
+            label2.Text = "0";
+            label2.Visible = false;
             // 
             // pictureBox4
             // 
@@ -267,6 +282,7 @@
             pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox4.TabIndex = 3;
             pictureBox4.TabStop = false;
+            pictureBox4.Click += pictureBox4_Click;
             // 
             // button4
             // 
@@ -282,6 +298,7 @@
             button4.TabIndex = 22;
             button4.Text = "Notification";
             button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
             // 
             // panel7
             // 
@@ -302,6 +319,7 @@
             pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox5.TabIndex = 3;
             pictureBox5.TabStop = false;
+            pictureBox5.Click += pictureBox5_Click;
             // 
             // button5
             // 
@@ -329,7 +347,7 @@
             // 
             // panel8
             // 
-            panel8.BackColor = Color.FromArgb(230, 230, 230);
+            panel8.BackColor = SystemColors.Control;
             panel8.Controls.Add(label1);
             panel8.Controls.Add(pictureBox1);
             panel8.Location = new Point(0, 719);
@@ -368,10 +386,10 @@
             // mainpanel
             // 
             mainpanel.BackColor = SystemColors.AppWorkspace;
-            mainpanel.Location = new Point(210, 62);
+            mainpanel.Location = new Point(210, 34);
             mainpanel.Margin = new Padding(0);
             mainpanel.Name = "mainpanel";
-            mainpanel.Size = new Size(965, 919);
+            mainpanel.Size = new Size(965, 947);
             mainpanel.TabIndex = 25;
             // 
             // Form1
@@ -399,6 +417,7 @@
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             panel6.ResumeLayout(false);
+            panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
@@ -435,5 +454,6 @@
         private PictureBox pictureBox1;
         private Label label1;
         private Panel panel8;
+        private Label label2;
     }
 }

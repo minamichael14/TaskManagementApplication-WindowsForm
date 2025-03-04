@@ -48,6 +48,7 @@
             checkedListBox1 = new CheckedListBox();
             label2 = new Label();
             label1 = new Label();
+            notification1 = new Custom_Control.Notification();
             flowLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -59,7 +60,7 @@
             bigLabel1.BackColor = Color.Transparent;
             bigLabel1.Font = new Font("Montserrat-Arabic Black", 25.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             bigLabel1.ForeColor = Color.FromArgb(80, 80, 80);
-            bigLabel1.Location = new Point(35, 9);
+            bigLabel1.Location = new Point(28, 28);
             bigLabel1.Name = "bigLabel1";
             bigLabel1.Size = new Size(152, 68);
             bigLabel1.TabIndex = 0;
@@ -72,7 +73,7 @@
             aloneTextBox1.EnabledCalc = true;
             aloneTextBox1.Font = new Font("Segoe UI", 9F);
             aloneTextBox1.ForeColor = Color.FromArgb(124, 133, 142);
-            aloneTextBox1.Location = new Point(10, 88);
+            aloneTextBox1.Location = new Point(25, 108);
             aloneTextBox1.MaxLength = 32767;
             aloneTextBox1.MultiLine = false;
             aloneTextBox1.Name = "aloneTextBox1";
@@ -89,7 +90,7 @@
             aloneButton2.EnabledCalc = true;
             aloneButton2.Font = new Font("Segoe UI", 9F);
             aloneButton2.ForeColor = Color.FromArgb(124, 133, 142);
-            aloneButton2.Location = new Point(325, 87);
+            aloneButton2.Location = new Point(340, 107);
             aloneButton2.Name = "aloneButton2";
             aloneButton2.Size = new Size(56, 36);
             aloneButton2.TabIndex = 6;
@@ -109,7 +110,7 @@
             parrotSuperButton1.HoverBackgroundColor = Color.FromArgb(80, 200, 76);
             parrotSuperButton1.HoverTextColor = Color.White;
             parrotSuperButton1.ImagePosition = ReaLTaiizor.Controls.ParrotSuperButton.ImgPosition.Left;
-            parrotSuperButton1.Location = new Point(776, 73);
+            parrotSuperButton1.Location = new Point(791, 93);
             parrotSuperButton1.Name = "parrotSuperButton1";
             parrotSuperButton1.PixelOffsetType = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
             parrotSuperButton1.SelectedBackColor = Color.LimeGreen;
@@ -127,7 +128,7 @@
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.BackColor = Color.LightGray;
             flowLayoutPanel1.Controls.Add(bigLabel2);
-            flowLayoutPanel1.Location = new Point(211, 142);
+            flowLayoutPanel1.Location = new Point(226, 162);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(5);
             flowLayoutPanel1.Size = new Size(715, 584);
@@ -152,7 +153,7 @@
             previousTag.AutoSize = true;
             previousTag.Font = new Font("Montserrat-Arabic Black", 22.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
             previousTag.ForeColor = SystemColors.ActiveCaptionText;
-            previousTag.Location = new Point(462, 757);
+            previousTag.Location = new Point(402, 776);
             previousTag.Name = "previousTag";
             previousTag.Size = new Size(44, 60);
             previousTag.TabIndex = 20;
@@ -164,7 +165,7 @@
             NextTag.AutoSize = true;
             NextTag.Font = new Font("Montserrat-Arabic Black", 22.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
             NextTag.ForeColor = SystemColors.ActiveCaptionText;
-            NextTag.Location = new Point(656, 759);
+            NextTag.Location = new Point(596, 778);
             NextTag.Name = "NextTag";
             NextTag.Size = new Size(44, 60);
             NextTag.TabIndex = 21;
@@ -176,7 +177,7 @@
             beforeNumLabel.AutoSize = true;
             beforeNumLabel.Font = new Font("Mongolian Baiti", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             beforeNumLabel.ForeColor = SystemColors.ActiveCaptionText;
-            beforeNumLabel.Location = new Point(512, 770);
+            beforeNumLabel.Location = new Point(452, 789);
             beforeNumLabel.Name = "beforeNumLabel";
             beforeNumLabel.Size = new Size(0, 31);
             beforeNumLabel.TabIndex = 22;
@@ -185,8 +186,8 @@
             // 
             CurrentNumLabel.AutoSize = true;
             CurrentNumLabel.Font = new Font("Montserrat-Arabic Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            CurrentNumLabel.ForeColor = Color.Firebrick;
-            CurrentNumLabel.Location = new Point(561, 753);
+            CurrentNumLabel.ForeColor = Color.LimeGreen;
+            CurrentNumLabel.Location = new Point(501, 772);
             CurrentNumLabel.Name = "CurrentNumLabel";
             CurrentNumLabel.Size = new Size(33, 48);
             CurrentNumLabel.TabIndex = 23;
@@ -197,7 +198,7 @@
             afterNumLabel.AutoSize = true;
             afterNumLabel.Font = new Font("Mongolian Baiti", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             afterNumLabel.ForeColor = SystemColors.ActiveCaptionText;
-            afterNumLabel.Location = new Point(620, 770);
+            afterNumLabel.Location = new Point(560, 789);
             afterNumLabel.Name = "afterNumLabel";
             afterNumLabel.Size = new Size(30, 31);
             afterNumLabel.TabIndex = 24;
@@ -212,7 +213,7 @@
             panel1.Controls.Add(checkedListBox1);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(9, 142);
+            panel1.Location = new Point(24, 162);
             panel1.Name = "panel1";
             panel1.Size = new Size(179, 584);
             panel1.TabIndex = 27;
@@ -304,11 +305,22 @@
             label1.TabIndex = 0;
             label1.Text = "Filter By:";
             // 
+            // notification1
+            // 
+            notification1.BackColor = Color.Transparent;
+            notification1.Location = new Point(758, 756);
+            notification1.Margin = new Padding(0);
+            notification1.Name = "notification1";
+            notification1.Size = new Size(270, 90);
+            notification1.TabIndex = 28;
+            notification1.Visible = false;
+            // 
             // TaskVW
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1102, 931);
+            Controls.Add(notification1);
             Controls.Add(panel1);
             Controls.Add(afterNumLabel);
             Controls.Add(CurrentNumLabel);
@@ -357,5 +369,6 @@
         private RadioButton radioButton1;
         private RadioButton radioButton2;
         private ReaLTaiizor.Controls.BigLabel bigLabel2;
+        private Custom_Control.Notification notification1;
     }
 }

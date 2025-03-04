@@ -1,6 +1,4 @@
 ﻿using System.Data;
-using System.Windows.Forms;
-using Microsoft.Extensions.DependencyInjection;
 using TaskManagementSystem.Custom_Control;
 using TaskManagementSystem.Models;
 using TaskManagementSystem.Models.Enums;
@@ -20,7 +18,7 @@ namespace TaskManagementSystem.Forms
         TaskControl[] taskControls = new TaskControl[4];
 
 
-        public TaskVW(TasksService tasksService, TaskFieldsForm form,CategoryService categoryService)
+        public TaskVW(TasksService tasksService, TaskFieldsForm form, CategoryService categoryService)
         {
             InitializeComponent();
             _tasksService = tasksService;
@@ -34,7 +32,7 @@ namespace TaskManagementSystem.Forms
             await PopulateTasks();
             CurrentNumLabel.Text = CurrentPageNum.ToString();
         }
-        
+
         public async Task PopulateTasks()
         {
             var tasklist = await Task.Run(() => itemDelegate(CurrentPageNum));
@@ -70,11 +68,17 @@ namespace TaskManagementSystem.Forms
         private void TaskControl_DeleteButtonClick(object sender, EventArgs e)
         {
             PopulateTasks();
+            //Notification notification = new Notification();
+            //notification.Location = new Point(791, 832);
+
+            notification1.Show();
+            
+            //notification1.
         }
 
         private void parrotSuperButton1_Click(object sender, EventArgs e)
         {
-            TaskFieldsForm taskFields = new TaskFieldsForm(_tasksService, new AppDBContext(),_categoryService);
+            TaskFieldsForm taskFields = new TaskFieldsForm(_tasksService, new AppDBContext(), _categoryService);
             taskFields.ShowDialog();
             SetCurrentPageNum(1);
             PopulateTasks();
@@ -114,7 +118,7 @@ namespace TaskManagementSystem.Forms
         private void NextTag_Click(object sender, EventArgs e)
         {
             var isExist = _tasksService.GetAll()
-                .Skip((CurrentPageNum - 1) * pageSize).Take(pageSize)
+                .Skip((CurrentPageNum) * pageSize).Take(pageSize)
                 .Any();
             if (isExist)
             {
@@ -246,7 +250,7 @@ namespace TaskManagementSystem.Forms
         private IEnumerable<TaskItem> GetSearched(int pageNumber)
         {
             var value = aloneTextBox1.Text;
-            return _tasksService.GetAll().Where(x=>x.Title.ToLower().Contains(value.ToLower()) || x.Description.ToLower().Contains(value.ToLower())).Distinct();
+            return _tasksService.GetAll().Where(x => x.Title.ToLower().Contains(value.ToLower()) || x.Description.ToLower().Contains(value.ToLower())).Distinct();
         }
         private List<TaskStatusValue> GetSelectedItems()
         {

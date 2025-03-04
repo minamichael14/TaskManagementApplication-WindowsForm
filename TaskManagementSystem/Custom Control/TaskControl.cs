@@ -64,7 +64,7 @@ namespace TaskManagementSystem.Custom_Control
         public DateTime Date
         {
             get { return _date; }
-            set { _date = value; DateLabel.Text = value.ToString("dd-MM HH:mm"); }
+            set { _date = value; DateLabel.Text = value.ToString("dd/MM HH:mm"); }
         }
 
         private TaskPriority _priority;
@@ -101,12 +101,8 @@ namespace TaskManagementSystem.Custom_Control
             if (result == DialogResult.Yes)
             {
                 await _taskService.DeleteAsync(ID);
-                MessageBox.Show("Item deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else
-            {
-                MessageBox.Show("Item deletion canceled.", "Cancel", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            
             DeleteButtonClick?.Invoke(this, e);
 
         }

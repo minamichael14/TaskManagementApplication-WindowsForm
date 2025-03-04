@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using TaskManagementSystem.Custom_Control;
 using TaskManagementSystem.Models;
 using TaskManagementSystem.Models.Enums;
 using TaskManagementSystem.Services;
@@ -83,6 +84,7 @@ namespace TaskManagementSystem.Forms
             if(parrotSuperButton1.ButtonText=="Add Task")
             {
                 await AddProcess();
+                
             }
             else
             {
@@ -95,13 +97,10 @@ namespace TaskManagementSystem.Forms
         private async Task AddProcess()
         {
             await _tasksService.AddAsync(GetObjectFromFields());
-
-            MessageBox.Show("Item Created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void EditProcess()
         {
             _tasksService.Update(GetObjectFromFields());
-            MessageBox.Show("Item Edited successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
     }

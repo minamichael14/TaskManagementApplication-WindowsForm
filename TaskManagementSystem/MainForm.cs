@@ -29,7 +29,8 @@ namespace TaskManagementSystem
         private void NavigateToForm1()
         {
             this.Hide();
-            var form1 = _serviceProvider.GetRequiredService<Form1>(); // Pass the shared service to Form1
+            var form1 = (Form1)Program.ServiceProvider.GetService(typeof(Form1)); // Pass the shared service to Form1
+            //var form1 = _serviceProvider.GetRequiredService<Form1>(); // Pass the shared service to Form1
             form1.Show();
         }
         

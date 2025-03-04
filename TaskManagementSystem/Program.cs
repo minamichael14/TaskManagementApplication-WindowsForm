@@ -48,6 +48,8 @@ namespace TaskManagementSystem
             services.AddTransient<Register>();
             services.AddTransient<Login>();
             services.AddTransient<MainForm>();
+            services.AddTransient<Report>();
+            services.AddTransient<NotificationVW>();
             services.AddSingleton<NavigationService>();
 
 
