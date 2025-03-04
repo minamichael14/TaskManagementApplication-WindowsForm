@@ -43,11 +43,11 @@ namespace TaskManagementSystem
 
             // Register your forms
             services.AddTransient<Form1>(); // Register the main form
+            services.AddTransient<MainForm>();
             services.AddTransient<TaskVW>();
             services.AddTransient<TaskFieldsForm>(); 
             services.AddTransient<Register>();
             services.AddTransient<Login>();
-            services.AddTransient<MainForm>();
             services.AddTransient<Report>();
             services.AddTransient<NotificationVW>();
             services.AddSingleton<NavigationService>();

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="FastReport.DataVisualization" Version="2025.1.18" />
+    <PackageReference Include="Jenga.NET" Version="4.0.0" />
     <PackageReference Include="LiveCharts.WinForms" Version="0.9.7.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
       <PrivateAssets>all</PrivateAssets>

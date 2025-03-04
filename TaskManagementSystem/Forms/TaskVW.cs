@@ -44,10 +44,10 @@ namespace TaskManagementSystem.Forms
                 taskControls[index].ID = task.ID;
                 taskControls[index].Title = task.Title;
                 taskControls[index].Description = task.Description;
-                //taskControls[index].User = task.User.Name;
                 taskControls[index].Status = task.Status.ToString();
                 taskControls[index].Date = task.DueDate;
                 taskControls[index].Priority = task.Priority;
+                taskControls[index].Category = task.Category.Name.ToString();
 
                 taskControls[index].EditButtonClick += TaskControl_EditButtonClick;
                 taskControls[index].DeleteButtonClick += TaskControl_DeleteButtonClick;
@@ -68,12 +68,6 @@ namespace TaskManagementSystem.Forms
         private void TaskControl_DeleteButtonClick(object sender, EventArgs e)
         {
             PopulateTasks();
-            //Notification notification = new Notification();
-            //notification.Location = new Point(791, 832);
-
-            notification1.Show();
-            
-            //notification1.
         }
 
         private void parrotSuperButton1_Click(object sender, EventArgs e)
@@ -130,9 +124,9 @@ namespace TaskManagementSystem.Forms
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            itemDelegate = FilterDataByDueDate;
-            SetCurrentPageNum(1);
-            PopulateTasks();
+            //itemDelegate = FilterDataByDueDate;
+            //SetCurrentPageNum(1);
+            //PopulateTasks();
         }
         private void SetCurrentPageNum(int value)
         {
@@ -156,23 +150,39 @@ namespace TaskManagementSystem.Forms
         private IEnumerable<TaskItem> FilterDataByDueDate(int pageNumber)
         {
             var selectedList = GetSelectedItems();
-            return _tasksService.GetAll().Where(task => selectedList.Contains(task.Status)).OrderBy(x => x.DueDate)
-                .Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            if (selectedList.Count > 0)
+            {
+                return _tasksService.GetAll().Where(task => selectedList.Contains(task.Status)).OrderBy(x => x.DueDate)
+                    .Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            }
+            else
+            {
+                return _tasksService.GetAll().OrderBy(x => x.DueDate)
+                    .Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            }
         }
         private IEnumerable<TaskItem> FilterDataByPriority(int pageNumber)
         {
             var selectedList = GetSelectedItems();
-
-            return _tasksService.GetAll().Where(task => selectedList.Contains(task.Status))
+            if (selectedList.Count > 0)
+            {
+                return _tasksService.GetAll().Where(task => selectedList.Contains(task.Status))
                 .OrderByDescending(x => x.Priority)
                 .Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            }
+            else
+            {
+                return _tasksService.GetAll()
+                .OrderByDescending(x => x.Priority)
+                .Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            itemDelegate = FilterDataByPriority;
-            SetCurrentPageNum(1);
-            PopulateTasks();
+            //itemDelegate = FilterDataByPriority;
+            //SetCurrentPageNum(1);
+            //PopulateTasks();
         }
 
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -262,6 +272,28 @@ namespace TaskManagementSystem.Forms
             }
 
             return selectedItems;
+        }
+
+
+
+        private void aloneTextBox1_Click_1(object sender, EventArgs e)
+        {
+            aloneTextBox1.Text = "";
+
+        }
+
+        private void radioButton1_Click(object sender, EventArgs e)
+        {
+            itemDelegate = FilterDataByDueDate;
+            SetCurrentPageNum(1);
+            PopulateTasks();
+        }
+
+        private void radioButton2_Click(object sender, EventArgs e)
+        {
+            itemDelegate = FilterDataByPriority;
+            SetCurrentPageNum(1);
+            PopulateTasks();
         }
     }
 }

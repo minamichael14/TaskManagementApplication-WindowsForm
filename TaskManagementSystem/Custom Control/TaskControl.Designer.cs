@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskControl));
             panel1 = new Panel();
+            Titlelabel = new Label();
             label1 = new Label();
             IDTxt = new TextBox();
             Deletebutton = new Button();
@@ -38,7 +39,6 @@
             CategoryLabel = new Label();
             DateLabel = new Label();
             StatusLabel = new Label();
-            Titlelabel = new Label();
             panel2 = new Panel();
             DescLabel = new Label();
             panel1.SuspendLayout();
@@ -48,6 +48,7 @@
             // 
             panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel1.BackColor = Color.WhiteSmoke;
+            panel1.Controls.Add(Titlelabel);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(IDTxt);
             panel1.Controls.Add(Deletebutton);
@@ -56,7 +57,6 @@
             panel1.Controls.Add(CategoryLabel);
             panel1.Controls.Add(DateLabel);
             panel1.Controls.Add(StatusLabel);
-            panel1.Controls.Add(Titlelabel);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(DescLabel);
             panel1.Dock = DockStyle.Fill;
@@ -66,13 +66,23 @@
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
+            // Titlelabel
+            // 
+            Titlelabel.BackColor = Color.Transparent;
+            Titlelabel.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Titlelabel.Location = new Point(178, 6);
+            Titlelabel.Name = "Titlelabel";
+            Titlelabel.Size = new Size(285, 38);
+            Titlelabel.TabIndex = 1;
+            Titlelabel.Text = "Title";
+            // 
             // label1
             // 
             label1.AutoEllipsis = true;
             label1.AutoSize = true;
             label1.BackColor = Color.Orange;
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(103, 37);
+            label1.Location = new Point(95, 35);
             label1.Name = "label1";
             label1.Padding = new Padding(5);
             label1.Size = new Size(30, 30);
@@ -91,7 +101,7 @@
             // 
             Deletebutton.BackColor = Color.Crimson;
             Deletebutton.ForeColor = SystemColors.ButtonHighlight;
-            Deletebutton.Location = new Point(591, 51);
+            Deletebutton.Location = new Point(598, 51);
             Deletebutton.Name = "Deletebutton";
             Deletebutton.Size = new Size(94, 52);
             Deletebutton.TabIndex = 9;
@@ -103,7 +113,7 @@
             // 
             Editbutton.BackColor = Color.SteelBlue;
             Editbutton.ForeColor = SystemColors.ButtonHighlight;
-            Editbutton.Location = new Point(491, 51);
+            Editbutton.Location = new Point(498, 51);
             Editbutton.Name = "Editbutton";
             Editbutton.Size = new Size(94, 52);
             Editbutton.TabIndex = 8;
@@ -127,7 +137,7 @@
             CategoryLabel.BorderStyle = BorderStyle.FixedSingle;
             CategoryLabel.FlatStyle = FlatStyle.Popup;
             CategoryLabel.ForeColor = SystemColors.ButtonHighlight;
-            CategoryLabel.Location = new Point(16, 80);
+            CategoryLabel.Location = new Point(13, 80);
             CategoryLabel.Name = "CategoryLabel";
             CategoryLabel.Padding = new Padding(5);
             CategoryLabel.Size = new Size(81, 32);
@@ -150,21 +160,12 @@
             StatusLabel.AutoSize = true;
             StatusLabel.BackColor = Color.Brown;
             StatusLabel.ForeColor = SystemColors.ButtonHighlight;
-            StatusLabel.Location = new Point(16, 36);
+            StatusLabel.Location = new Point(11, 36);
             StatusLabel.Name = "StatusLabel";
             StatusLabel.Padding = new Padding(5);
             StatusLabel.Size = new Size(72, 30);
             StatusLabel.TabIndex = 3;
             StatusLabel.Text = "Pending";
-            // 
-            // Titlelabel
-            // 
-            Titlelabel.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Titlelabel.Location = new Point(158, 6);
-            Titlelabel.Name = "Titlelabel";
-            Titlelabel.Size = new Size(285, 38);
-            Titlelabel.TabIndex = 1;
-            Titlelabel.Text = "Title";
             // 
             // panel2
             // 
@@ -177,10 +178,11 @@
             // 
             // DescLabel
             // 
+            DescLabel.BackColor = Color.Transparent;
             DescLabel.Font = new Font("Segoe UI Semilight", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DescLabel.Location = new Point(161, 50);
+            DescLabel.Location = new Point(181, 50);
             DescLabel.Name = "DescLabel";
-            DescLabel.Size = new Size(319, 88);
+            DescLabel.Size = new Size(319, 87);
             DescLabel.TabIndex = 2;
             DescLabel.Text = resources.GetString("DescLabel.Text");
             // 

@@ -53,18 +53,19 @@ namespace TaskManagementSystem.Custom_Control
             set { _status = value; StatusLabel.Text = value; }
         }
 
-        private string _user;
-        public string User
-        {
-            get { return _user; }
-            set { _user = value; CategoryLabel.Text = value; }
-        }
-
+        
         private DateTime _date;
         public DateTime Date
         {
             get { return _date; }
             set { _date = value; DateLabel.Text = value.ToString("dd/MM HH:mm"); }
+        }
+
+        private string _category;
+        public string Category
+        {
+            get { return _category; }
+            set { _category = value; CategoryLabel.Text = value.ToString(); }
         }
 
         private TaskPriority _priority;
@@ -76,10 +77,10 @@ namespace TaskManagementSystem.Custom_Control
 
                 label1.Text = value switch
                 {
-                    TaskPriority.Low => "L",
-                    TaskPriority.Medium => "M",
-                    TaskPriority.High => "H",
-                    TaskPriority.None => "N"
+                    TaskPriority.Low => "Low",
+                    TaskPriority.Medium => "Medium",
+                    TaskPriority.High => "High",
+                    TaskPriority.None => "None"
                 };
             }
         }

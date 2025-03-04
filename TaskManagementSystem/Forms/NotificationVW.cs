@@ -28,7 +28,7 @@ namespace TaskManagementSystem.Forms
             {
                 Notification n1 = new Notification();
                 n1.ID = item.Key;
-                n1.Message = $"Task '{item.Value}' is overdue!.";
+                n1.Message = $"Reminder: The following task is overdue: '{item.Value}' . Please address it ASAP.";
                 flowLayoutPanel1.Controls.Add(n1);
             }
         }

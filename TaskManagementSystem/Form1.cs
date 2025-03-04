@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using TaskManagementSystem.Forms;
 using TaskManagementSystem.Helper;
 using TaskManagementSystem.Models;
@@ -8,33 +7,21 @@ namespace TaskManagementSystem
 {
     public partial class Form1 : Form
     {
-        private System.Windows.Forms.Timer notificationTimer;
-        private NotifyIcon taskNotifyIcon;
-        private HashSet<TaskItem> notifiedTasks;
-
         bool SidebarExpand = true;
         TaskVW _taskVW;
-        private readonly NavigationService _navigationService;
-        private readonly IServiceProvider _serviceProvider;
-        Report _report;
         TasksService _tasksService;
-
-        public Form1(TasksService tasksService, Report report, TaskVW taskVW, NavigationService navigationService, IServiceProvider serviceProvider)
+        private System.Windows.Forms.Timer notificationTimer;
+        
+        public Form1(TasksService tasksService, TaskVW taskVW)
         {
             InitializeComponent();
             _taskVW = taskVW;
-            _navigationService = navigationService;
-            _navigationService.NavigateToMainForm += NavigateToMainForm;
-            _serviceProvider = serviceProvider;
-            _report = report;
             _tasksService = tasksService;
-
-
-            notifiedTasks = new HashSet<TaskItem>(new TaskItemEqualityComparer());
+            CheckTaskDueDates(); 
 
             // Initialize and start the timer
             notificationTimer = new System.Windows.Forms.Timer();
-            notificationTimer.Interval = 10000; // Check every minute (60000 ms)
+            notificationTimer.Interval = 30000; // Check every half minute (60000 ms)
             notificationTimer.Tick += NotificationTimer_Tick;
             notificationTimer.Start();
         }
@@ -46,51 +33,38 @@ namespace TaskManagementSystem
         private void CheckTaskDueDates()
         {
             DateTime currentTime = DateTime.Now;
-
+            
             // Get tasks where the due date has passed
-            var overdueTasks = _tasksService.GetAll().Where(t => t.DueDate < currentTime).ToList();
+            var overdueTasks = _tasksService.GetAll()
+                .Where(t => t.DueDate < currentTime).ToList();
 
             foreach (var task in overdueTasks)
             {
-                if (!notifiedTasks.Contains(task))
+                var taskx = new KeyValuePair<int, string>(task.ID, task.Title);
+                if (!NotificationsSession.List.Contains(taskx))
                 {
                     int notNum = int.Parse(label2.Text);
-
                     label2.Text = (++notNum).ToString();
                     label2.Visible = true;
-                    notifiedTasks.Add(task);
-                    NotificationsSession.List.Add(new KeyValuePair<int, string>(task.ID, task.Title));
 
-                    //Console.WriteLine($"Task '{task.Title}' is overdue! It was due on {task.DueDate}.");
+                    NotificationsSession.List
+                        .Add(new KeyValuePair<int, string>(task.ID, task.Title));
                 }
             }
         }
-
-
-        private void NavigateToMainForm()
-        {
-            this.Hide();
-            var mainForm = (MainForm)Program.ServiceProvider.GetService(typeof(MainForm));  // Resolve MainForm from DI container
-            mainForm.Show();
-        }
-
 
         private async void Form1_Load(object sender, EventArgs e)
         {
             await loadform(_taskVW);
             label1.Text = UserSession.Username;
-
         }
-
-
 
         private void SidebarTimer_Tick(object sender, EventArgs e)
         {
             if (SidebarExpand)
             {
                 SidebarContainer.Width -= 10;
-                mainpanel.Size = new Size(900, 694);//900; 620
-                //mainpanel. = 12;
+                mainpanel.Size = new Size(900, 694);
                 mainpanel.Location = new Point(90, 62);
                 if (SidebarContainer.Width == SidebarContainer.MinimumSize.Width)
                 {
@@ -101,8 +75,7 @@ namespace TaskManagementSystem
             else
             {
                 SidebarContainer.Width += 10;
-                mainpanel.Size = new Size(771, 694); // 771; 694
-                //mainpanel.Location = new Point(216, 62);//219; 62
+                mainpanel.Size = new Size(771, 694); 
 
                 if (SidebarContainer.Width == SidebarContainer.MaximumSize.Width)
                 {
@@ -129,7 +102,9 @@ namespace TaskManagementSystem
         public async Task loadform(object Form)
         {
             if (this.mainpanel.Controls.Count > 0)
+            {
                 this.mainpanel.Controls.RemoveAt(0);
+            }
             Form f = Form as Form;
             f.TopLevel = false;
             f.Dock = DockStyle.Fill;
@@ -141,7 +116,6 @@ namespace TaskManagementSystem
         private async void button3_Click(object sender, EventArgs e)
         {
             await loadform(new Report(_tasksService));
-
         }
 
 
@@ -152,38 +126,46 @@ namespace TaskManagementSystem
 
         private void button5_Click(object sender, EventArgs e)
         {
-            _navigationService.GoToMainForm();
-            NotificationsSession.List.Clear();
+            this.Hide();
+            var mainForm = (MainForm)Program.ServiceProvider.GetService(typeof(MainForm));
+            mainForm.Show();
+            NotificationsSession.List = new List<KeyValuePair<int, string>>();
+            notificationTimer.Stop();
         }
 
         private void pictureBox5_Click(object sender, EventArgs e)
         {
-            _navigationService.GoToMainForm();
+            this.Hide();
+            var mainForm = (MainForm)Program.ServiceProvider.GetService(typeof(MainForm));
+            mainForm.Show();
+            NotificationsSession.List = new List<KeyValuePair<int, string>>();
+            notificationTimer.Stop();
         }
 
         private async void button4_Click(object sender, EventArgs e)
         {
             await loadform(new NotificationVW());
+            label2.Visible = false;
         }
 
         private async void pictureBox4_Click(object sender, EventArgs e)
         {
             await loadform(new NotificationVW());
+            label2.Visible = false;
+
         }
     }
 
-    public class TaskItemEqualityComparer : IEqualityComparer<TaskItem>
-    {
-        public bool Equals(TaskItem x, TaskItem y)
-        {
-            // Tasks are considered equal if their names and due dates are the same
-            return x.ID == y.ID;
-        }
+    //public class TaskItemEqualityComparer : IEqualityComparer<TaskItem>
+    //{
+    //    public bool Equals(TaskItem x, TaskItem y)
+    //    {
+    //        return x.ID == y.ID;
+    //    }
 
-        public int GetHashCode(TaskItem obj)
-        {
-            // Combine hash codes of ID and DueDate
-            return obj.ID.GetHashCode();
-        }
-    }
+    //    public int GetHashCode(TaskItem obj)
+    //    {
+    //        return obj.ID.GetHashCode();
+    //    }
+    //}
 }

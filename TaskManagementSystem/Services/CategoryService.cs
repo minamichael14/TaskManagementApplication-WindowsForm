@@ -20,5 +20,11 @@ namespace TaskManagementSystem.Services
         {
             return _categoryRepo.GetAll();
         }
+
+        public async Task AddAsync(Category category)
+        {
+            await _categoryRepo.AddAsync(category);
+            _categoryRepo.SaveChanges();
+        }
     }
 }

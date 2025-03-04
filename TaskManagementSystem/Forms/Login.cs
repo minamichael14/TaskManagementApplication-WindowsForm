@@ -24,7 +24,10 @@ namespace TaskManagementSystem.Forms
             {
                 //MessageBox.Show("Login successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //_form1.ShowDialog();
+                //this.Hide();
+                var x = this.GetHashCode();
                 CloseMainForm?.Invoke(this, EventArgs.Empty);
+
             }
             else
             {

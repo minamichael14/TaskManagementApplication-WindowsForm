@@ -31,6 +31,9 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             bigLabel3 = new ReaLTaiizor.Controls.BigLabel();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             panel1 = new Panel();
@@ -45,11 +48,13 @@
             panel4 = new Panel();
             label7 = new Label();
             CompletedTasks = new Label();
+            chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chart2).BeginInit();
             SuspendLayout();
             // 
             // bigLabel3
@@ -69,27 +74,28 @@
             chart1.BackColor = Color.Transparent;
             chartArea1.Name = "ChartArea1";
             chart1.ChartAreas.Add(chartArea1);
-            legend1.ForeColor = Color.Transparent;
             legend1.Name = "Legend1";
             chart1.Legends.Add(legend1);
-            chart1.Location = new Point(413, 165);
+            chart1.Location = new Point(438, 47);
             chart1.Name = "chart1";
-            chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
+            chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Color = Color.White;
             series1.Legend = "Legend1";
+            series1.MarkerColor = Color.FromArgb(192, 0, 0);
             series1.Name = "Series1";
             series1.ShadowColor = Color.Black;
             series1.ShadowOffset = 2;
             chart1.Series.Add(series1);
-            chart1.Size = new Size(454, 465);
+            chart1.Size = new Size(364, 350);
             chart1.TabIndex = 2;
             chart1.Text = "chart1";
             // 
             // panel1
             // 
-            panel1.BackColor = Color.SandyBrown;
+            panel1.BackColor = Color.FromArgb(34, 120, 34);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(TotalTasks);
             panel1.Location = new Point(43, 195);
@@ -123,7 +129,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.SaddleBrown;
+            panel2.BackColor = Color.ForestGreen;
             panel2.Controls.Add(label3);
             panel2.Controls.Add(PendingTasks);
             panel2.Location = new Point(43, 395);
@@ -157,7 +163,7 @@
             // 
             // panel3
             // 
-            panel3.BackColor = Color.Chocolate;
+            panel3.BackColor = Color.FromArgb(34, 170, 34);
             panel3.Controls.Add(label5);
             panel3.Controls.Add(InProgressTasks);
             panel3.Location = new Point(43, 470);
@@ -191,7 +197,7 @@
             // 
             // panel4
             // 
-            panel4.BackColor = Color.DarkOrange;
+            panel4.BackColor = Color.FromArgb(34, 199, 34);
             panel4.Controls.Add(label7);
             panel4.Controls.Add(CompletedTasks);
             panel4.Location = new Point(43, 544);
@@ -223,13 +229,32 @@
             CompletedTasks.TabIndex = 1;
             CompletedTasks.Text = "0";
             // 
+            // chart2
+            // 
+            chartArea2.Name = "ChartArea1";
+            chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chart2.Legends.Add(legend2);
+            chart2.Location = new Point(352, 436);
+            chart2.Name = "chart2";
+            series2.BorderWidth = 10;
+            series2.ChartArea = "ChartArea1";
+            series2.LabelBorderWidth = 10;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chart2.Series.Add(series2);
+            chart2.Size = new Size(517, 375);
+            chart2.TabIndex = 7;
+            chart2.Text = "chart2";
+            // 
             // Report
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.White;
-            ClientSize = new Size(891, 694);
+            ClientSize = new Size(891, 883);
+            Controls.Add(chart2);
             Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(panel2);
@@ -249,6 +274,7 @@
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)chart2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -268,5 +294,6 @@
         private Panel panel4;
         private Label label7;
         private Label CompletedTasks;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
     }
 }

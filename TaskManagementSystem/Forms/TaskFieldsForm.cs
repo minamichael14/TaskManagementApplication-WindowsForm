@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using TaskManagementSystem.Custom_Control;
 using TaskManagementSystem.Models;
 using TaskManagementSystem.Models.Enums;
 using TaskManagementSystem.Services;
@@ -11,8 +10,8 @@ namespace TaskManagementSystem.Forms
         AppDBContext _context;
         TasksService _tasksService;
         CategoryService _categoryService;
-        
-        public TaskFieldsForm(TasksService tasksService , AppDBContext context, CategoryService categoryService)
+
+        public TaskFieldsForm(TasksService tasksService, AppDBContext context, CategoryService categoryService)
         {
             InitializeComponent();
             _context = context;
@@ -28,13 +27,14 @@ namespace TaskManagementSystem.Forms
         }
         public string FormType
         {
-            set { 
+            set
+            {
                 label1.Text = value;
                 parrotSuperButton1.ButtonText = value;
             }
         }
 
-       
+
         public async void AddDataToFields(int id)
         {
             var taskItem = await _tasksService.GetByID(id);
@@ -45,7 +45,7 @@ namespace TaskManagementSystem.Forms
             dateTimePicker1.Value = taskItem.DueDate;
             comboBox1.Text = taskItem.Priority.ToString();
             comboBox3.Text = taskItem.Status.ToString();
-            comboBox4.Text = taskItem.Category.Name; 
+            comboBox4.Text = taskItem.Category.Name;
         }
 
         private void parrotSuperButton2_Click(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace TaskManagementSystem.Forms
         private TaskItem GetObjectFromFields()
         {
             int id;
-            int.TryParse(IDTxt.Text,out id);
+            int.TryParse(IDTxt.Text, out id);
             string title = textBox1.Text;
             string description = textBox2.Text;
             DateTime dateTime = dateTimePicker1.Value;
@@ -68,7 +68,7 @@ namespace TaskManagementSystem.Forms
             var CategoryID = _context.Categories.Where(x => x.Name == taskCategory).Select(x => x.ID).FirstOrDefault();
             var task = new TaskItem
             {
-                ID =id,
+                ID = id,
                 Title = title,
                 Description = description,
                 DueDate = dateTime,
@@ -81,10 +81,10 @@ namespace TaskManagementSystem.Forms
         }
         private async void parrotSuperButton1_ClickAsync(object sender, EventArgs e)
         {
-            if(parrotSuperButton1.ButtonText=="Add Task")
+            if (parrotSuperButton1.ButtonText == "Add Task")
             {
                 await AddProcess();
-                
+
             }
             else
             {
@@ -103,5 +103,13 @@ namespace TaskManagementSystem.Forms
             _tasksService.Update(GetObjectFromFields());
         }
 
+        private void parrotSuperButton3_Click(object sender, EventArgs e)
+        {
+            var addingCategory = new CategoryAdd(_categoryService);
+            addingCategory.ShowDialog();
+            comboBox4.DataSource = _categoryService.GetAll().Select(x => x.Name).ToList();
+
+
+        }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskVW));
             bigLabel1 = new ReaLTaiizor.Controls.BigLabel();
             aloneTextBox1 = new ReaLTaiizor.Controls.AloneTextBox();
             aloneButton2 = new ReaLTaiizor.Controls.AloneButton();
@@ -48,7 +49,6 @@
             checkedListBox1 = new CheckedListBox();
             label2 = new Label();
             label1 = new Label();
-            notification1 = new Custom_Control.Notification();
             flowLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -83,6 +83,7 @@
             aloneTextBox1.Text = "Search";
             aloneTextBox1.TextAlign = HorizontalAlignment.Left;
             aloneTextBox1.UseSystemPasswordChar = false;
+            aloneTextBox1.Click += aloneTextBox1_Click_1;
             // 
             // aloneButton2
             // 
@@ -153,11 +154,12 @@
             previousTag.AutoSize = true;
             previousTag.Font = new Font("Montserrat-Arabic Black", 22.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
             previousTag.ForeColor = SystemColors.ActiveCaptionText;
-            previousTag.Location = new Point(402, 776);
+            previousTag.Image = (Image)resources.GetObject("previousTag.Image");
+            previousTag.Location = new Point(405, 776);
             previousTag.Name = "previousTag";
-            previousTag.Size = new Size(44, 60);
+            previousTag.Size = new Size(35, 60);
             previousTag.TabIndex = 20;
-            previousTag.Text = "<";
+            previousTag.Text = " ";
             previousTag.Click += previousTag_Click;
             // 
             // NextTag
@@ -165,11 +167,12 @@
             NextTag.AutoSize = true;
             NextTag.Font = new Font("Montserrat-Arabic Black", 22.1999989F, FontStyle.Bold, GraphicsUnit.Point, 0);
             NextTag.ForeColor = SystemColors.ActiveCaptionText;
-            NextTag.Location = new Point(596, 778);
+            NextTag.Image = (Image)resources.GetObject("NextTag.Image");
+            NextTag.Location = new Point(620, 776);
             NextTag.Name = "NextTag";
-            NextTag.Size = new Size(44, 60);
+            NextTag.Size = new Size(35, 60);
             NextTag.TabIndex = 21;
-            NextTag.Text = ">";
+            NextTag.Text = " ";
             NextTag.Click += NextTag_Click;
             // 
             // beforeNumLabel
@@ -239,6 +242,7 @@
             radioButton1.Text = "DueDate";
             radioButton1.UseVisualStyleBackColor = true;
             radioButton1.CheckedChanged += radioButton1_CheckedChanged;
+            radioButton1.Click += radioButton1_Click;
             // 
             // radioButton2
             // 
@@ -252,6 +256,7 @@
             radioButton2.Text = "Priority";
             radioButton2.UseVisualStyleBackColor = true;
             radioButton2.CheckedChanged += radioButton2_CheckedChanged;
+            radioButton2.Click += radioButton2_Click;
             // 
             // label3
             // 
@@ -305,22 +310,11 @@
             label1.TabIndex = 0;
             label1.Text = "Filter By:";
             // 
-            // notification1
-            // 
-            notification1.BackColor = Color.Transparent;
-            notification1.Location = new Point(758, 756);
-            notification1.Margin = new Padding(0);
-            notification1.Name = "notification1";
-            notification1.Size = new Size(270, 90);
-            notification1.TabIndex = 28;
-            notification1.Visible = false;
-            // 
             // TaskVW
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1102, 931);
-            Controls.Add(notification1);
             Controls.Add(panel1);
             Controls.Add(afterNumLabel);
             Controls.Add(CurrentNumLabel);
@@ -369,6 +363,5 @@
         private RadioButton radioButton1;
         private RadioButton radioButton2;
         private ReaLTaiizor.Controls.BigLabel bigLabel2;
-        private Custom_Control.Notification notification1;
     }
 }

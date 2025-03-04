@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using TaskManagementSystem.Forms;
-using TaskManagementSystem.Services;
+﻿using TaskManagementSystem.Forms;
 
 namespace TaskManagementSystem
 {
@@ -8,11 +6,7 @@ namespace TaskManagementSystem
     {
         Login _login;
         Register _register;
-        //Form1 _form1;
-        //public Action NavigateToForm1Action;
-        private readonly NavigationService _navigationService;
-        private readonly IServiceProvider _serviceProvider;
-        public MainForm(Login login ,Register register, NavigationService navigationService, IServiceProvider serviceProvider)
+        public MainForm(Login login ,Register register)
         {
             InitializeComponent();
             _register = register;
@@ -20,27 +14,13 @@ namespace TaskManagementSystem
             _login = login;
             _login.CloseMainForm += _login_CloseMainForm;
             _login.OpenRegisterForm += _login_OpenRegisterForm;
-            //_form1 = form1;
-            //_form1.NavigateToMainFormAction += ShowMainForm;
-            _navigationService = navigationService;
-            _navigationService.NavigateToForm1 += NavigateToForm1;
-            _serviceProvider = serviceProvider;
         }
-        private void NavigateToForm1()
+       
+        private void _login_CloseMainForm(object? sender, EventArgs e)
         {
             this.Hide();
             var form1 = (Form1)Program.ServiceProvider.GetService(typeof(Form1)); // Pass the shared service to Form1
-            //var form1 = _serviceProvider.GetRequiredService<Form1>(); // Pass the shared service to Form1
             form1.Show();
-        }
-        
-        private void _login_CloseMainForm(object? sender, EventArgs e)
-        {
-            _navigationService.GoToForm1();
-            //_navigationService.NavigateToForm1?.Invoke();
-            //_form1.ShowDialog();
-            //NavigateToForm1Action?.Invoke();
-            //this.Close();
         }
 
         private async void _register_OpenLoginForm(object? sender, EventArgs e)
@@ -56,13 +36,14 @@ namespace TaskManagementSystem
         private async void MainForm_LoadAsync(object sender, EventArgs e)
         {
             await loadform(_login);
-
         }
 
         public async Task loadform(object Form)
         {
             if (this.panel2.Controls.Count > 0)
+            {
                 this.panel2.Controls.RemoveAt(0);
+            }
             Form f = Form as Form;
             f.TopLevel = false;
             f.Dock = DockStyle.Fill;
